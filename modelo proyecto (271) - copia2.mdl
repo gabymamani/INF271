@@ -1,0 +1,231 @@
+{UTF-8}
+abandono=
+	DELAY FIXED( Estudiantes*((indice de desercion estudiantil+(1-interes en la materia)\
+		)/20) , demora2 , 1)
+	~	Estudiantes
+	~		|
+
+aprueba=
+	DELAY FIXED( Estudiantes*porcentaje aprobados , Demora , 2 )
+	~	Estudiantes
+	~		|
+
+demora2=
+	2
+	~	 [?,?,1]
+	~		|
+
+Demora=
+	4
+	~	 [0,6,1]
+	~		|
+
+reprueban=
+	DELAY FIXED(Estudiantes*((dificultad de materia+(1-interes en la materia))/20), demora3\
+		 , 2)
+	~	Estudiantes
+	~		|
+
+demora3=
+	3
+	~	 [?,?,1]
+	~		|
+
+calidad de internet=
+	RANDOM UNIFORM(0.1, 1 , 0.1 )
+	~	 [0,1,0.1]
+	~		|
+
+dificultad de materia=
+	RANDOM UNIFORM(0.1, 1 , 0.1 )
+	~	 [0,1,0.1]
+	~		|
+
+Estudiantes= INTEG (
+	-abandono-aprueba-reprueban,
+		100)
+	~	Estudiantes [0,100]
+	~		|
+
+estudiantes aprobados= INTEG (
+	aprueba,
+		0)
+	~	Estudiantes
+	~		|
+
+Estudiantes que abandonan la materia= INTEG (
+	abandono,
+		0)
+	~	Estudiantes
+	~		|
+
+estudiantes reprobados= INTEG (
+	reprueban,
+		0)
+	~	Estudiantes
+	~		|
+
+indice de desercion estudiantil=
+	(1-(calidad de internet+situacion economica)/2)
+	~	Dmnl
+	~		|
+
+interes del docente en la materia=
+	RANDOM UNIFORM(0.1, 1 , 0.1 )
+	~	 [0,1,0.1]
+	~		|
+
+interes en la materia=
+	RANDOM UNIFORM(0.1, 1 , 0.1 )
+	~	 [0,1,0.1]
+	~		|
+
+materia abierta=
+	estudiantes aprobados/minimo de estudiantes requeridos para la apertura
+	~	Semestre [0,1]
+	~		|
+
+metodos creativos de enseñanza=
+	RANDOM UNIFORM(0.1, 1 , 0.1 )
+	~	 [0,1,0.1]
+	~		|
+
+minimo de estudiantes requeridos para la apertura=
+	65
+	~	Estudiantes [?,?,1]
+	~		|
+
+porcentaje aprobados=
+	(interes del docente en la materia+interes en la materia+metodos creativos de enseñanza\
+		)/3
+	~	 [0,1]
+	~		|
+
+situacion economica=
+	RANDOM UNIFORM(0.1, 1 , 0.1)
+	~	 [0,1,0.1]
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 6
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Arial Unicode MS|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,73,0
+10,1,Estudiantes,740,339,55,13,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Estudiantes que abandonan la materia,459,338,62,34,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,estudiantes reprobados,740,97,55,20,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,estudiantes aprobados,1030,339,54,20,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,7,1,100,0,0,22,0,192,0,-1--1--1,,1|(737,276)|
+1,6,7,3,4,0,0,22,0,192,0,-1--1--1,,1|(737,166)|
+11,7,530,737,221,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,8,reprueban,794,221,49,13,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,11,1,100,0,0,22,0,192,0,-1--1--1,,1|(840,338)|
+1,10,11,4,4,0,0,22,0,192,0,-1--1--1,,1|(937,338)|
+11,11,420,892,338,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,aprueba,892,359,40,13,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,15,1,100,0,0,22,0,192,0,-1--1--1,,1|(645,338)|
+1,14,15,2,4,0,0,22,0,192,0,-1--1--1,,1|(557,338)|
+11,15,354,599,338,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,16,abandono,599,359,48,13,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,indice de desercion estudiantil,504,490,48,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,situacion economica,442,608,52,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,calidad de internet,591,602,49,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,18,17,1,0,0,0,0,192,0,-1--1--1,,1|(441,516)|
+1,21,19,17,1,0,0,0,0,192,0,-1--1--1,,1|(585,531)|
+10,22,dificultad de materia,1008,124,57,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,22,8,1,0,0,0,0,192,0,-1--1--1,,1|(922,202)|
+10,24,porcentaje aprobados,911,446,51,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,metodos creativos de enseñanza,1115,582,57,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,interes del docente en la materia,900,618,63,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,interes en la materia,1293,492,57,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,28,26,24,1,0,0,0,0,192,0,-1--1--1,,1|(944,537)|
+1,29,25,24,1,0,0,0,0,192,0,-1--1--1,,1|(1024,506)|
+1,30,24,12,0,0,0,0,0,192,0,-1--1--1,,1|(902,405)|
+1,31,27,24,1,0,0,0,0,192,0,-1--1--1,,1|(1112,453)|
+1,32,27,8,1,0,0,0,0,192,0,-1--1--1,,1|(1238,188)|
+10,33,minimo de estudiantes requeridos para la apertura,1137,252,72,34,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,materia abierta,1256,408,37,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,35,33,34,1,0,0,0,0,192,0,-1--1--1,,1|(1273,297)|
+1,36,4,34,1,0,0,0,0,192,0,-1--1--1,,1|(1158,340)|
+1,37,1,8,1,0,0,0,0,192,0,-1--1--1,,1|(821,288)|
+1,38,1,16,1,0,0,0,0,192,0,-1--1--1,,1|(627,298)|
+1,39,1,12,1,0,0,0,0,192,0,-1--1--1,,1|(809,428)|
+12,40,0,1557,214,194,184,8,79,0,0,2,0,0,0,0,0,0,0,0,0
+materia abierta,Graph
+12,41,0,1760,586,385,168,8,79,0,0,2,0,0,0,0,0,0,0,0,0
+estudiantes aprobados,Graph
+1,42,17,15,0,0,0,0,0,192,0,-1--1--1,,1|(553,408)|
+1,43,27,15,1,0,0,0,0,192,0,-1--1--1,,1|(896,699)|
+10,44,Demora,775,499,40,13,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,45,44,11,0,0,0,0,0,192,0,-1--1--1,,1|(831,419)|
+10,46,demora2,684,474,44,13,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,46,15,0,0,0,0,0,192,0,-1--1--1,,1|(642,407)|
+10,48,demora3,989,267,44,13,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,49,48,7,0,0,0,0,0,192,0,-1--1--1,,1|(851,241)|
+12,50,0,60,189,290,149,8,79,0,0,2,0,0,0,0,0,0,0,0,0
+Estudiantes que abandonan la materia,Graph
+12,51,0,39,591,249,211,8,79,0,0,2,0,0,0,0,0,0,0,0,0
+estudiantes reprobados,Graph
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:reprueban
+9:current
+19:73,0
+24:0
+25:6
+26:6
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
